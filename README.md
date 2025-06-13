@@ -31,8 +31,9 @@ chmod +x group-joiner.sh
 ### 1. Get Your API Token
 
 1. Go to [Netbird Dashboard](https://app.netbird.io)
-2. Navigate to **Settings** → **Access Tokens**
-3. Create a new **Personal Access Token**
+2. Navigate to **Team** → **Users**
+3. Select your user
+3. Create a new **Access Token**
 4. Copy the token value
 
 ### 2. Set Environment Variable
