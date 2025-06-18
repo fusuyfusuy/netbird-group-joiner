@@ -5,13 +5,15 @@
 
 set -euo pipefail
 
+# load .env if it exists
+[[ -f .env ]] && source .env
+
 # check if TOKEN is set
 if [[ -z "${NETBIRD_TOKEN:-}" ]]; then
     echo "error: NETBIRD_TOKEN environment variable not set"
-    echo "export NETBIRD_TOKEN=<your_token>"
+    echo "add NETBIRD_TOKEN=<your_token> to .env file"
     exit 1
 fi
-
 # extract FQDN from netbird status
 echo "[+] getting local FQDN..."
 FQDN=$(netbird status -d | grep "^FQDN:" | awk '{print $2}')
