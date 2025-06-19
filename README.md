@@ -23,6 +23,7 @@ A bash script for managing Netbird peer group memberships via CLI. Automatically
 ```bash
 git clone https://github.com/fusuyfusuy/netbird-scripts.git
 cd netbird-scripts
+echo "NETBIRD_TOKEN=<your_token_here>" > .env
 chmod +x group-joiner.sh
 ```
 
@@ -39,20 +40,21 @@ chmod +x group-joiner.sh
 ### 2. Set Environment Variable
 
 ```bash
+# recommended
+echo "NETBIRD_TOKEN=<your_token_here>" > .env
+
+# this will also work but it will add API token to your shell env
 export NETBIRD_TOKEN="your_token_here"
-```
-
-Or add to your shell profile for persistence:
-
-```bash
-echo 'export NETBIRD_TOKEN="your_token_here"' >> ~/.bashrc
-source ~/.bashrc
 ```
 
 ## Usage
 
 ```bash
 ./group-joiner.sh
+
+# or better, create an alias
+alias netbird-connect=$PWD/group-joiner.sh
+netbird-connect
 ```
 
 ### Example Session
@@ -97,15 +99,6 @@ join a group? select number (1-2/n): 1
 - `GET /api/groups/{groupId}` - Get specific group details
 - `PUT /api/groups/{groupId}` - Update group membership
 
-## Error Handling
-
-The script handles common errors:
-- Missing API token
-- Netbird not running
-- Invalid group selections
-- API authentication failures
-- Network connectivity issues
-
 ## Requirements
 
 - **Bash 4.0+**: For associative arrays
@@ -134,11 +127,6 @@ MIT License - see LICENSE file for details
 ## Troubleshooting
 
 ### Common Issues
-
-**"NETBIRD_TOKEN environment variable not set"**
-```bash
-export NETBIRD_TOKEN="your_token_here"
-```
 
 **"couldn't extract FQDN from netbird status"**
 - Ensure netbird client is running: `netbird status`
