@@ -5,15 +5,19 @@
 
 set -euo pipefail
 
-# load .env if it exists
-[[ -f .env ]] && source .env
+# get script directory (handles symlinks too)
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+# load .env from script dir
+[[ -f "${SCRIPT_DIR}/.env" ]] && source "${SCRIPT_DIR}/.env"
 
 # check if TOKEN is set
 if [[ -z "${NETBIRD_TOKEN:-}" ]]; then
     echo "error: NETBIRD_TOKEN environment variable not set"
-    echo "add NETBIRD_TOKEN=<your_token> to .env file"
+    echo "add NETBIRD_TOKEN=<your_token> to ${SCRIPT_DIR}/.env file"
     exit 1
 fi
+
 # extract FQDN from netbird status
 echo "[+] getting local FQDN..."
 FQDN=$(netbird status -d | grep "^FQDN:" | awk '{print $2}')
