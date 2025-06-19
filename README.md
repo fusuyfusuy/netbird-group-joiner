@@ -2,6 +2,8 @@
 
 A bash script for managing Netbird peer group memberships via CLI. Automatically detects your local peer and provides an interactive interface for joining/leaving groups.
 
+Why? I use Netbird both as an internal VPN and also sometimes change my external IP, to do that i have configured some groups to have some exit nodes. This script automatically adds current client to a group, which Netbird connects me to an exit node.
+
 ## Features
 
 - **Auto-detection**: Automatically finds your local peer using `netbird status`
